@@ -1,90 +1,116 @@
-# Obsidian Sample Plugin
+# Simple Checklist
 
-This is a sample plugin for Obsidian (https://obsidian.md).
+A lightweight and intuitive checklist plugin for [Obsidian](https://obsidian.md/) that helps you organize and track tasks with ease.
 
-This project uses TypeScript to provide type checking and documentation.
-The repo depends on the latest plugin API (obsidian.d.ts) in TypeScript Definition format, which contains TSDoc comments describing what it does.
+## Features
 
-This sample plugin demonstrates some of the basic functionality the plugin API can do.
-- Adds a ribbon icon, which shows a Notice when clicked.
-- Adds a command "Open modal (simple)" which opens a Modal.
-- Adds a plugin setting tab to the settings page.
-- Registers a global click event and output 'click' to the console.
-- Registers a global interval which logs 'setInterval' to the console.
+✨ **Quick task entry** - Add items instantly with just a few keystrokes  
+📋 **Two-list system** - Organize tasks into "Next Steps" and "General" categories  
+🔢 **Auto-numbering** - Items in "Next Steps" are automatically numbered  
+✅ **Checkbox support** - Mark items as complete with a single click  
+✏️ **Edit on click** - Quickly modify any task by clicking on its text  
+🎯 **Drag & drop** - Reorder tasks within and between lists with smooth drag & drop  
+💾 **Persistent storage** - All your tasks are automatically saved  
 
-## First time developing plugins?
+## Installation
 
-Quick starting guide for new plugin devs:
+### From Obsidian Community Plugins
 
-- Check if [someone already developed a plugin for what you want](https://obsidian.md/plugins)! There might be an existing plugin similar enough that you can partner up with.
-- Make a copy of this repo as a template with the "Use this template" button (login to GitHub if you don't see it).
-- Clone your repo to a local development folder. For convenience, you can place this folder in your `.obsidian/plugins/your-plugin-name` folder.
-- Install NodeJS, then run `npm i` in the command line under your repo folder.
-- Run `npm run dev` to compile your plugin from `main.ts` to `main.js`.
-- Make changes to `main.ts` (or create new `.ts` files). Those changes should be automatically compiled into `main.js`.
-- Reload Obsidian to load the new version of your plugin.
-- Enable plugin in settings window.
-- For updates to the Obsidian API run `npm update` in the command line under your repo folder.
+1. Open Obsidian Settings
+2. Go to **Settings → Community plugins → Browse**
+3. Search for "Simple Checklist"
+4. Click **Install** and then **Enable**
 
-## Releasing new releases
+### Manual Installation (Development)
 
-- Update your `manifest.json` with your new version number, such as `1.0.1`, and the minimum Obsidian version required for your latest release.
-- Update your `versions.json` file with `"new-plugin-version": "minimum-obsidian-version"` so older versions of Obsidian can download an older version of your plugin that's compatible.
-- Create new GitHub release using your new version number as the "Tag version". Use the exact version number, don't include a prefix `v`. See here for an example: https://github.com/obsidianmd/obsidian-sample-plugin/releases
-- Upload the files `manifest.json`, `main.js`, `styles.css` as binary attachments. Note: The manifest.json file must be in two places, first the root path of your repository and also in the release.
-- Publish the release.
+1. Clone this repository to `.obsidian/plugins/simple-checklist/` in your vault
+2. Run `npm install` in the plugin directory
+3. Run `npm run dev` to start the development watch mode
+4. Reload Obsidian to load the plugin
 
-> You can simplify the version bump process by running `npm version patch`, `npm version minor` or `npm version major` after updating `minAppVersion` manually in `manifest.json`.
-> The command will bump version in `manifest.json` and `package.json`, and add the entry for the new version to `versions.json`
+## Usage
 
-## Adding your plugin to the community plugin list
+### Opening the Checklist
 
-- Check the [plugin guidelines](https://docs.obsidian.md/Plugins/Releasing/Plugin+guidelines).
-- Publish an initial version.
-- Make sure you have a `README.md` file in the root of your repo.
-- Make a pull request at https://github.com/obsidianmd/obsidian-releases to add your plugin.
+Use the command palette (**Ctrl/Cmd + P**) and search for "Open checklist" to open the checklist panel.
 
-## How to use
+### Adding Items
 
-- Clone this repo.
-- Make sure your NodeJS is at least v16 (`node --version`).
-- `npm i` or `yarn` to install dependencies.
-- `npm run dev` to start compilation in watch mode.
+Type your task in the input field at the top and press **Enter** to add it:
 
-## Manually installing the plugin
+- **Next Steps list** (default) - Just type your task normally
+- **General list** - Start your task with `--` prefix (e.g., `-- buy groceries`)
 
-- Copy over `main.js`, `styles.css`, `manifest.json` to your vault `VaultFolder/.obsidian/plugins/your-plugin-id/`.
+### Managing Tasks
 
-## Improve code quality with eslint
-- [ESLint](https://eslint.org/) is a tool that analyzes your code to quickly find problems. You can run ESLint against your plugin to find common bugs and ways to improve your code. 
-- This project already has eslint preconfigured, you can invoke a check by running`npm run lint`
-- Together with a custom eslint [plugin](https://github.com/obsidianmd/eslint-plugin) for Obsidan specific code guidelines.
-- A GitHub action is preconfigured to automatically lint every commit on all branches.
+- **Check off completed tasks** - Click the checkbox next to any item
+- **Edit a task** - Click on the task text to edit it. Press **Enter** to save or **Escape** to cancel
+- **Delete a task** - Click the trash icon (🗑️) on the right side of the item
+- **Reorder tasks** - Drag the three-dot handle (⋮) to move tasks up/down, or between lists
 
-## Funding URL
+### Auto-Numbering
 
-You can include funding URLs where people who use your plugin can financially support it.
+Items in the "Next Steps" list are automatically numbered. When you reorder or move items between lists, the numbering updates automatically:
 
-The simple way is to set the `fundingUrl` field to your link in your `manifest.json` file:
-
-```json
-{
-    "fundingUrl": "https://buymeacoffee.com"
-}
+```
+Next Steps          General
+1. Buy milk        -- Finish report
+2. Call mom        -- Check emails
+3. Do laundry
 ```
 
-If you have multiple URLs, you can also do:
+## Tips
 
-```json
-{
-    "fundingUrl": {
-        "Buy Me a Coffee": "https://buymeacoffee.com",
-        "GitHub Sponsor": "https://github.com/sponsors",
-        "Patreon": "https://www.patreon.com/"
-    }
-}
+- Use "Next Steps" for your priority tasks and "General" for everything else
+- Drag tasks between lists to change their priority at any time
+- All changes are saved automatically to your vault
+
+## Development
+
+### Setup
+
+```bash
+npm install
 ```
 
-## API Documentation
+### Build for Development
 
-See https://docs.obsidian.md
+```bash
+npm run dev
+```
+
+This starts the TypeScript compiler in watch mode and bundles changes automatically.
+
+### Build for Production
+
+```bash
+npm run build
+```
+
+This creates a minified `main.js` ready for release.
+
+### Code Structure
+
+```
+src/
+├── main.ts       # Plugin entry point and data persistence
+├── view.ts       # UI rendering and user interactions
+├── settings.ts   # Settings interface (placeholder)
+└── types.ts      # TypeScript type definitions
+```
+
+## Data Storage
+
+The plugin automatically saves all your tasks using Obsidian's plugin data API. Your checklist data is stored securely in your vault's `.obsidian/plugins/simple-checklist/` directory and persists across sessions.
+
+## License
+
+This plugin is released under the MIT License. See [LICENSE](LICENSE) for details.
+
+## Support
+
+If you encounter any issues or have feature requests, please open an issue on [GitHub](https://github.com/valereimann/simple-checklist).
+
+## Credits
+
+Built with ❤️ using the [Obsidian Sample Plugin](https://github.com/obsidianmd/obsidian-sample-plugin) as a foundation.
