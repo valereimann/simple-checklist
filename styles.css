@@ -220,3 +220,22 @@ Simple Checklist Plugin Styles
 .checklist-btn-delete:hover {
 	color: var(--text-error);
 }
+
+.checklist-link {
+	color: var(--interactive-accent);
+	cursor: pointer;
+	text-decoration: none;
+	border-bottom: 1px solid var(--interactive-accent);
+	transition: all 0.2s ease;
+}
+
+.checklist-link:hover {
+	text-decoration: underline;
+	opacity: 0.8;
+}
+
+.checklist-label {
+	cursor: text;
+	user-select: text;
+	word-break: break-word;
+}

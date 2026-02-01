@@ -152,6 +152,50 @@ export class ChecklistView extends ItemView {
 		void this.saveData();
 	}
 
+	private renderTextWithLinks(container: HTMLElement, text: string): void {
+		// Parse text for [[link]] syntax and create clickable links
+		const linkRegex = /\[\[([^\]]+)\]\]/g;
+		let lastIndex = 0;
+		let match: RegExpExecArray | null;
+		let hasLinks = false;
+
+		while ((match = linkRegex.exec(text)) !== null) {
+			hasLinks = true;
+			// Add text before the link
+			if (match.index > lastIndex) {
+				container.appendText(text.substring(lastIndex, match.index));
+			}
+
+			// Create the link element
+			const linkText = match[1] || "";
+			const link = container.createEl("a", {
+				cls: "checklist-link internal-link",
+				attr: {
+					"data-href": linkText,
+					href: linkText,
+				},
+				text: linkText,
+			});
+
+			// Open the linked page when clicked
+			link.addEventListener("click", (e) => {
+				e.preventDefault();
+				e.stopPropagation();
+				this.plugin.app.workspace.openLinkText(linkText, "", false);
+			});
+
+			lastIndex = match.index + match[0].length;
+		}
+
+		// Add remaining text after the last link (or all text if no links found)
+		if (lastIndex < text.length) {
+			container.appendText(text.substring(lastIndex));
+		} else if (!hasLinks) {
+			// If no links were found at all, append the entire text
+			container.appendText(text);
+		}
+	}
+
 	private render(): void {
 		this.urgentListElement.empty();
 		this.generalListElement.empty();
@@ -226,14 +270,17 @@ export class ChecklistView extends ItemView {
 					}
 				});
 			} else {
-				// View mode
+				// View mode - render text with link support
 				const label = li.createEl("label", {
 					cls: "checklist-label",
-					text: item.text,
 				});
-				label.addEventListener("click", () => {
-					this.editingId = item.id;
-					this.render();
+				this.renderTextWithLinks(label, item.text);
+				label.addEventListener("click", (e) => {
+					// Don't edit if clicking on a link
+					if ((e.target as HTMLElement).tagName !== "A") {
+						this.editingId = item.id;
+						this.render();
+					}
 				});
 			}
 
