@@ -10,7 +10,8 @@ A lightweight and intuitive checklist plugin for [Obsidian](https://obsidian.md/
 ✅ **Checkbox support** - Mark items as complete with a single click  
 ✏️ **Edit on click** - Quickly modify any task by clicking on its text  
 🎯 **Drag & drop** - Reorder tasks within and between lists with smooth drag & drop  
-💾 **Persistent storage** - All your tasks are automatically saved  
+� **Link support** - Click links using Obsidian's `[[page-name]]` syntax to navigate  
+�💾 **Persistent storage** - All your tasks are automatically saved  
 
 ## Installation
 
@@ -48,14 +49,23 @@ Type your task in the input field at the top and press **Enter** to add it:
 - **Delete a task** - Click the trash icon (🗑️) on the right side of the item
 - **Reorder tasks** - Drag the three-dot handle (⋮) to move tasks up/down, or between lists
 
+### Linking to Other Pages
+
+You can use Obsidian's standard link syntax to create clickable links within your tasks:
+
+- Type `[[page-name]]` to create a link to another page in your vault
+- Example: `Review [[Project Notes]]` or `-- Check [[Shopping List]]`
+- Click on any link to navigate to that page
+- Multiple links in one task are supported: `Check [[Note 1]] and [[Note 2]]`
+
 ### Auto-Numbering
 
 Items in the "Next Steps" list are automatically numbered. When you reorder or move items between lists, the numbering updates automatically:
 
 ```
-Next Steps          General
-1. Buy milk        -- Finish report
-2. Call mom        -- Check emails
+Next Steps                    General
+1. Review [[Project Notes]]  -- Finish report
+2. Call mom                  -- Check [[emails]]
 3. Do laundry
 ```
 
@@ -63,6 +73,7 @@ Next Steps          General
 
 - Use "Next Steps" for your priority tasks and "General" for everything else
 - Drag tasks between lists to change their priority at any time
+- Add links to tasks to quickly navigate to related notes
 - All changes are saved automatically to your vault
 
 ## Development
